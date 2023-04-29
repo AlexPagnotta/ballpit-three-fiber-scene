@@ -11,6 +11,7 @@ import {
 import { useControls } from "leva";
 import { useMemo, useRef } from "react";
 import { OrbitControls } from "@react-three/drei";
+import { Perf } from "r3f-perf";
 
 const SPHERES_COUNT = 15;
 const SPHERE_RADIUS = 1;
@@ -135,8 +136,9 @@ const InstancedSpheres = () => {
 };
 
 const App = () => {
-  const { debug, orbitControls } = useControls("Settings", {
+  const { debug, perf, orbitControls } = useControls("Settings", {
     debug: false,
+    perf: false,
     orbitControls: false,
   });
 
@@ -149,6 +151,8 @@ const App = () => {
         zoom: 50,
       }}
     >
+      {perf && <Perf position="top-left" />}
+
       {orbitControls && <OrbitControls />}
 
       <ambientLight intensity={1.5} />
